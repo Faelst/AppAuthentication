@@ -42,13 +42,10 @@ module.exports.authorizationService = async (req, res) => {
     let serviceId;
     switch (resource_id) {
         case 'urn:tve:noggin': // id Noggin
-            serviceId = 1
+            serviceId = '2572'
             break;
         case 'urn:tve:paramountplus': // id Noggin
-            serviceId = '02253'
-            break;
-        case 'urn:sva:mumo': // id mumo
-            serviceId = 3
+            serviceId = '2571'
             break;
     }
 
