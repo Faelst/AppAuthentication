@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "deploy": "webpack --mode development",
-    "start": "set PORT=8080 && nodemon ./src/loader.js",
+    "start": "set PORT=4004 && nodemon ./src/loader.js",
     "build": "pm2.cmd start ./dist/Server.js --name AppAuthentication",
     "build nodemon": "set PORT=8080 && nodemon ./dist/Serve.js"
   },
