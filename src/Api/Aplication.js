@@ -39,6 +39,8 @@ module.exports.authorizationService = async (req, res) => {
         action_id,
         ip_address } = req.query;
 
+    console.log(subscriber_id, resource_id)
+
     let serviceId;
     switch (resource_id) {
         case 'urn:tve:noggin': // id Noggin
@@ -47,26 +49,35 @@ module.exports.authorizationService = async (req, res) => {
         case 'urn:tve:paramountplus': // id Noggin
             serviceId = '2571'
             break;
+        default:
+            return res.status(404).send({
+                "access": false
+            })
     }
 
-    const selectQuery = `SELECT
+    try {
+        const selectQuery = `SELECT
                             ci.*
                         FROM contract_items ci 
                             INNER JOIN contracts c ON c.id = ci.contract_id AND c.status IN (1)
                         WHERE c.contract_number = ${subscriber_id}
                             AND ci.deleted = 0
                             AND ci.service_product_id = ${serviceId}`
-
-    db.select(selectQuery,
-        function (err, result) {
-            if (!result.length) return res.status(404).send({
-                "access": false
-            })
-            return res.status(200).send({
-                "access": true,
-                "rating": "G",
-                "ttl": 3600
-               })
-        }
-    )
+        db.select(selectQuery,
+            function (err, result) {
+                if (!result.length) return res.status(404).send({
+                    "access": false
+                })
+                return res.status(200).send({
+                    "access": true,
+                    "rating": "G",
+                    "ttl": 3600
+                })
+            }
+        )
+    } catch (error) {
+        res.status(404).send({
+            "access": false
+        })
+    }
 }
