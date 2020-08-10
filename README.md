@@ -19,7 +19,7 @@ Retornando um JSON ao request.
 
 ## Ambiente de Desenvolvimento
 
-Para rodar essa aplicação em sua máquina, você precisará de um ambiente NodeJs básico instalado.
+Para rodar a aplicação em sua máquina, você precisará de um ambiente NodeJs básico instalado.
 
 **Clonando o repositório:**
 
